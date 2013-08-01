@@ -11,7 +11,7 @@ $(function(){
     var theMovie = $('input').val();
     var movie = theMovie.replace(/" "/g, '%20');
     // movie.replace("")
-    url ='http://www.omdbapi.com/?t=' + movie;
+    url ='http://www.omdbapi.com/?s=' + movie;
     // console.log(movieGet());
     // movieGet();
  $.ajax({
@@ -21,30 +21,50 @@ $(function(){
   }).done(function(data){
     console.log(data);
     junk = data;
-    movieInfo();
+    multiMovies();
   });
    return false;
   });
 
 });
 
+$('#single').on(click, function() {
+  singleMovie();
 
-//  function movieGet() { $.ajax({
-//       type: 'get',
-//       url: url,
-//       dataType: 'json'
-//   }).done(function(data){
-//     console.log("i'm done");
-//     console.log(data);
-//   }).fail(function(data){
-//     console.log("i've failed");
-//     console.log(data);
-//   }).always(function(data){
-//     console.log("i always run!");
-//   });
+   });
 
-// };
-function movieInfo() {
-  for (var i = 0; i < junk.length; ++i)
- $('body').append('<div>' + junk[i].Title + ", " + junk[i].Year);
+
+$('#multi').on(click, function() {
+  multiMovie();
+   });
+
+
+function ajaxSearch() {
+ $.ajax({
+      type: 'get',
+      url: url,
+      dataType: 'json'
+  }).done(function(data){
+    console.log(data);
+    junk = data;
+    multiMovies();
+  });
 };
+
+
+
+
+function multiMovies() {
+  var theMovie = $('input').val();
+    var movie = theMovie.replace(/" "/g, '%20');
+  url ='http://www.omdbapi.com/?s=' + movie;
+ for (var i = 0; i < junk.Search.length; ++i)
+ $('body').append('<div id='+ i + '>' + junk.Search[i].Title + ", " + junk.Search[i].Year);
+};
+
+function singleMovie() {
+  var theMovie = $('input').val();
+    var movie = theMovie.replace(/" "/g, '%20');
+    url ='http://www.omdbapi.com/?t=' + movie;
+  $('body').append('<div id='+ i +'>' + junk.Title + ", " + junk.Year);
+}

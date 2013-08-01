@@ -40,7 +40,7 @@ $('#multi').on(click, function() {
 
 
 function ajaxSearch() {
- $.ajax({
+   $.ajax({
       type: 'get',
       url: url,
       dataType: 'json'
@@ -49,22 +49,14 @@ function ajaxSearch() {
     junk = data;
     multiMovies();
   });
-};
-
-
+}
 
 
 function multiMovies() {
-  var theMovie = $('input').val();
-    var movie = theMovie.replace(/" "/g, '%20');
-  url ='http://www.omdbapi.com/?s=' + movie;
  for (var i = 0; i < junk.Search.length; ++i)
  $('body').append('<div id='+ i + '>' + junk.Search[i].Title + ", " + junk.Search[i].Year);
 };
 
 function singleMovie() {
-  var theMovie = $('input').val();
-    var movie = theMovie.replace(/" "/g, '%20');
-    url ='http://www.omdbapi.com/?t=' + movie;
   $('body').append('<div id='+ i +'>' + junk.Title + ", " + junk.Year);
 }
